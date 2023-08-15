@@ -1,0 +1,139 @@
+import java.util.*;
+import java.text.DecimalFormat;
+ 
+public class currency
+{
+   public static void main(String[] args)
+   {
+      double amount;
+      double rupee, dollar, pound, euro, yen, won;
+      int choice;
+ 
+      DecimalFormat f = new DecimalFormat("##.##");
+ 
+      Scanner sc = new Scanner(System.in);
+ 
+      System.out.println("Following are the Choices:");
+      System.out.println("Enter 1: Rupee");
+      System.out.println("Enter 2: Dollar");
+      System.out.println("Enter 3: Pound");
+      System.out.println("Enter 4: Euro");
+      System.out.println("Enter 5: Yen");
+      System.out.println("Enter 5: Won");
+ 
+      System.out.print("\nChoose from above options: ");
+      choice = sc.nextInt();
+ 
+      System.out.println("Enter the amount you want to convert?");
+      amount = sc.nextFloat();
+ 
+      switch (choice)
+      {
+         case 1:  // Ruppe Conversion
+            dollar = amount * 0.012;
+            System.out.println(amount + " Rupee = " + f.format(dollar) + " Dollar");
+ 
+            pound = amount * 0.0094;
+            System.out.println(amount + " Rupee = " + f.format(pound) + " Pound");
+ 
+            euro = amount * 0.011;
+            System.out.println(amount + " Rupee = " + f.format(euro) + " Euro");
+ 
+            yen = amount * 1.75;
+            System.out.println(amount + " Rupee = " + f.format(yen) + " Yen");
+ 
+            won = amount * 16.03;
+            System.out.println(amount + " Rupee = " + f.format(won) + " won");
+            break;
+ 
+         case 2:  // Dollar Conversion
+            rupee = amount * 83.29;
+            System.out.println(amount + " Dollar = " + f.format(rupee) + " Rupees");
+ 
+            pound = amount *0.79;
+            System.out.println(amount + " Dollar = " + f.format(pound) + " Pound");
+ 
+            euro = amount *0.92;
+            System.out.println(amount + " Dollar = " + f.format(euro) + " Euro");
+ 
+            yen = amount *145.52;
+            System.out.println(amount + " Dollar = " + f.format(yen) + " Yen");
+ 
+            won = amount *1335.69;
+            System.out.println(amount + " Dollar = " + f.format(won) + " won");
+            break;
+ 
+         case 3:  // Pound Conversion
+            rupee = amount * 105.87;
+            System.out.println(amount + " pound = " + f.format(rupee) + " Rupees");
+ 
+            dollar = amount *1.27;
+            System.out.println(amount + " pound = " + f.format(dollar) + " Dollar");
+ 
+            euro = amount *1.16;
+            System.out.println(amount + " pound = " + f.format(euro) + " Euro");
+ 
+            yen = amount *184.98;
+            System.out.println(amount + " pound = " + f.format(yen) + " Yen");
+ 
+            won = amount *1697.78;
+            System.out.println(amount + " pound = " + f.format(won) + " won");
+            break;
+ 
+         case 4:  // Euro Conversion
+            rupee = amount * 90.91;
+            System.out.println(amount + " euro = " + f.format(rupee) + " Rupees");
+ 
+            dollar = amount *1.09;
+            System.out.println(amount + " euro = " + f.format(dollar) + " Dollar");
+ 
+            pound = amount *0.86;
+            System.out.println(amount + " euro = " + f.format(pound) + " Pound");
+ 
+            yen = amount *158.84;
+            System.out.println(amount + " euro = " + f.format(yen) + " Yen");
+ 
+            won = amount *1458.08;
+            System.out.println(amount + " euro = " + f.format(won) + " won");
+            break;
+ 
+         case 5:  // Yen Conversion
+            rupee = amount *0.57;
+            System.out.println(amount + " yen = " + f.format(rupee) + " Rupees");
+ 
+            dollar = amount *0.0069;
+            System.out.println(amount + " yen = " + f.format(dollar) + " Dollar");
+ 
+            pound = amount *0.0054;
+            System.out.println(amount + " yen = " + f.format(pound) + " Pound");
+ 
+            euro = amount *0.0063;
+            System.out.println(amount + " yen = " + f.format(euro) + " Euro");
+ 
+            won = amount *9.18;
+            System.out.println(amount + " yen = " + f.format(won) + " won");
+            break;
+ 
+         case 6:  // won Conversion
+            rupee = amount *0.062;
+            System.out.println(amount + " won = " + f.format(rupee) + " Rupees");
+ 
+            dollar = amount *0.00075;
+            System.out.println(amount + " won = " + f.format(dollar) + " dollar");
+ 
+            pound = amount *0.00059;
+            System.out.println(amount + " won =: " + f.format(pound) + " pound");
+ 
+            euro = amount *0.00069;
+            System.out.println(amount + " won = " + f.format(euro) + " euro");
+ 
+            yen = amount *0.11;
+            System.out.println(amount + " won = " + f.format(yen) + " yen");
+            break;
+ 
+          //Default case
+         default:
+            System.out.println("Invalid Input");
+      }
+   }
+}
