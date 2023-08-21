@@ -1,0 +1,129 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.LinkedList;
+import java.util.Random;
+
+public class snakegame extends JPanel implements KeyListener {
+    private static final int CELL_SIZE = 20;
+    private LinkedList<Point> snake;
+    private Point food;
+    private int direction; // 0: up, 1: right, 2: down, 3: left
+    private boolean gameOver;
+
+    public snakegame() {
+        setPreferredSize(new Dimension(400, 400));
+        setBackground(Color.BLACK);
+        setFocusable(true);
+        addKeyListener(this);
+
+        snake = new LinkedList<>();
+        snake.add(new Point(5, 5));
+        direction = 1; // start moving to the right
+        spawnFood();
+
+        Timer timer = new Timer(150, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (!gameOver) {
+                    move();
+                    repaint();
+                }
+            }
+        });
+        timer.start();
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.setColor(Color.GREEN);
+        for (Point p : snake) {
+            g.fillRect(p.x * CELL_SIZE, p.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        }
+
+        g.setColor(Color.RED);
+        g.fillRect(food.x * CELL_SIZE, food.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+
+        if (gameOver) {
+            g.setColor(Color.WHITE);
+            g.drawString("Game Over", 160, 200);
+        }
+    }
+
+    public void keyPressed(KeyEvent e) {
+        int newDirection = -1;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                newDirection = 0;
+                break;
+            case KeyEvent.VK_RIGHT:
+                newDirection = 1;
+                break;
+            case KeyEvent.VK_DOWN:
+                newDirection = 2;
+                break;
+            case KeyEvent.VK_LEFT:
+                newDirection = 3;
+                break;
+        }
+
+        if (Math.abs(direction - newDirection) != 2) {
+            direction = newDirection;
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void move() {
+        Point newHead = (Point) snake.getFirst().clone();
+        switch (direction) {
+            case 0: // up
+                newHead.translate(0, -1);
+                break;
+            case 1: // right
+                newHead.translate(1, 0);
+                break;
+            case 2: // down
+                newHead.translate(0, 1);
+                break;
+            case 3: // left
+                newHead.translate(-1, 0);
+                break;
+        }
+
+        if (newHead.equals(food)) {
+            snake.addFirst(newHead);
+            spawnFood();
+        } else {
+            Point tail = snake.removeLast();
+            if (snake.contains(newHead) || newHead.x < 0 || newHead.x >= 20 || newHead.y < 0 || newHead.y >= 20) {
+                gameOver = true;
+            } else {
+                snake.addFirst(newHead);
+            }
+        }
+    }
+
+    public void spawnFood() {
+        Random rand = new Random();
+        int x, y;
+        do {
+            x = rand.nextInt(20);
+            y = rand.nextInt(20);
+        } while (snake.contains(new Point(x, y)));
+        food = new Point(x, y);
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Snake Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        snakegame game = new snakegame();
+        frame.add(game);
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
